@@ -6,7 +6,7 @@ class GeneticAlgorithm():
     def create_initial_population(self):
         population = []
 
-        while len(population) < Constants.population_size:
+        while len(population) < Constants.initial_population_size:
             random_hyp = {}   
             for param in Constants.gene_hyperparameters:
                 random_hyp[param] = random.choice(Constants.gene_hyperparameters[param])
