@@ -1,5 +1,6 @@
 class Constants():
     num_generations = 15
+    initial_population_size = 40
     population_size = 20
 
     gene_hyperparameters = {
