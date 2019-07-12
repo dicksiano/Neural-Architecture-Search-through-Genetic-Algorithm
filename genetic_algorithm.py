@@ -6,17 +6,15 @@ class GeneticAlgorithm():
     def create_initial_population(self):
         population = []
 
-        for i in range(Constants.population_size):
+        while len(population) < Constants.population_size:
             random_hyp = {}   
             for param in Constants.gene_hyperparameters:
                 random_hyp[param] = random.choice(Constants.gene_hyperparameters[param])
 
-            random_neural_net = NeuralNetwork(random_hyp)
-            population.append(random_neural_net)
+            if random_hyp not in population:
+                population.append(random_hyp)
 
-        assert(len(population) == Constants.population_size)
-
-        return population
+        return [NeuralNetwork(hyperparam) for hyperparam in population]
 
     def mutation(self, neural_net):
         mut = random.choice( list(Constants.gene_hyperparameters.keys()) )
