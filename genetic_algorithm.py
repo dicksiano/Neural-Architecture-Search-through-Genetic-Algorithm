@@ -1,6 +1,7 @@
 from config import Constants
 from neural_network import NeuralNetwork
 import random
+import itertools as it
 
 class GeneticAlgorithm():
     def create_initial_population(self):
@@ -15,6 +16,13 @@ class GeneticAlgorithm():
                 population.append(random_hyp)
 
         return [NeuralNetwork(hyperparam) for hyperparam in population]
+
+    def create_all_choromossomes(self):
+        keys = Constants.gene_hyperparameters.keys()
+        values = (Constants.gene_hyperparameters[key] for key in keys)
+        combinations = [dict(zip(keys, combination)) for combination in it.product(*values)]
+
+        return [NeuralNetwork(hyperparam) for hyperparam in combinations]
 
     def mutation(self, neural_net):
         mut = random.choice( list(Constants.gene_hyperparameters.keys()) )
